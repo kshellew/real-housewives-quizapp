@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Real Housewives Quiz</title>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;700&display=swap" rel="stylesheet">
+  
+    <!--  <link href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css' rel='stylesheet' type='text/css'/> -->
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <header>
+        <!-- Quiz Title, Always Displayed-->
+        <h1 class='box'>How Well Do You Know Bravo's Real Housewives?</h1>
+    </header>
+        <main>
+            <!-- Status Bar-->
+            <section class='status-bar box hidden'>
+                <ul>
+                    <li id='js-progress'> <span>Question: </span>1 of 5</li>
+                    <li id='js-score'><span>Score: </span> 0 pts</li>
+                </ul>
+            </section>
+            
+            <!-- Start Box -->
+            <section>
+                <div class='start box'>
+                    <h2>Ready To Get Started?</h2>
+                    <img src="images/intro.gif" alt="gif giselle saying this is going to be good" class="gifs">
+                    <div class='button-container'>
+                        <button class='start-btn'>Let's Go!</button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Question Box -->
+            <section class='quiz-form hidden'>
+                <div class='box question-box'>
+                    <form>
+                    <h2 class='question-start'>Question #<span class='question-number'>1</span></h2>
+                    <p class='question-sentence'></p>
+                        <legend class="choices">
+                        <!-- Renders choices -->
+                        </legend>
+                    </form>
+                    <button class="button-container">Submit</button>
+                </div>
+            </section>
+        
+            <!-- Right Feedback Box -->
+            <section class='feedback box hidden'>
+            </section>
+
+            <!-- Wrong Feedback Box -->
+            <section>
+            </section>
+
+            <!-- Final Results Box -->
+            <section class='results box hidden'>
+        
+            </section>
+
+            
+            <!-- Start Box -->
+            <section>
+            </section>
+        </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="index.js"></script>  
+</body>
+</html>
