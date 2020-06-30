@@ -224,6 +224,9 @@ function results(){
     $('.question-box, .status-bar').hide();
     $('.results').show(); 
     $('.results').html(`    
+        <h2>Thanks for Playing</h2>
+        <p>Your Score is ${score} /5 </p>
+        <img src="images/end.gif" alt="gif giselle saying check check check the end" class="gifs">
         <div class='button-container'>
             <button type="submit" id="restart-button">Restart</button>
         </div>`);
@@ -232,17 +235,13 @@ function results(){
         event.preventDefault();
         window.location.reload(true);
         //$('.results').hide();
-        
         //startQuiz();
         //resetProgress();
-        
         //$('.start').show();
     });
     console.log('restartQuiz ran')
 }
 
-
-//takes user back to the starting view to restart the quiz
 
 
 function runQuiz(){
