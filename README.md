@@ -7,7 +7,7 @@ User Experience:
 - Users should be asked questions 1 after the other.
 - Users should only be prompted with 1 question at a time.
 - Users should not be able to skip questions.
-- Users should also be able to see which question they're on (for instance, "7 out of 10") and their current score ("5 correct, 2 incorrect").
+- Users should also be able to see which question they're on and their current score.
 - Upon submitting an answer, users should:
     - receive textual feedback about their answer. If they were incorrect, they should be told the correct answer.
        be moved onto the next question (or interact with an element to move on).
