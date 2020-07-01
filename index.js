@@ -35,12 +35,12 @@ let score = 0;
 let questionIndex = 0;
 
 //begins the quiz
-//hide the intro gif  
-// shows the status bar on click 
+//hides the start box
+//on click, shows the status bar
 
 function startQuiz(){
     $('.start').on('click', '.start-btn', function () {
-        console.log('startQuiz ran');
+        //console.log('startQuiz ran');
         $('.start').hide();
         $('.quiz-form, .status-bar').show();
         createQuestion();
@@ -50,7 +50,7 @@ function startQuiz(){
 //renders each question
 function createQuestion(){
     if (questionIndex===5){
-        console.log('end of questions')
+        //console.log('end of questions')
         results()
     } else {
         $('.question-box').html(`
@@ -76,8 +76,8 @@ function createQuestion(){
     </form>`);
 
     }
-    console.log(questionIndex +'from createQuestion')
-    console.log('createQuestion ran')
+    //console.log(questionIndex +'from createQuestion')
+    //console.log('createQuestion ran')
 
 }
 
@@ -100,30 +100,23 @@ function submitAnswer(){
         //After all questions have been asked, Final Score Page is loaded
         else {
             answerChoice(selectAns);
-            //if (score === 5) {
-                //$('.close').click((event) => perfectScore())
-            //}
             results();
-            // console.log('Current index is higher than 5');
         }
     })
         let selectAns = ``;
     
-    console.log('submitAnswer ran')
+    //console.log('submitAnswer ran')
 }
-
 
 function answerChoice(sel) {
     if (sel === STORE[questionIndex].answer) {
         //console.log("The answer was correct");
-        correctAnswer();
-        
-       
+        correctAnswer();      
     } else {
         wrongAnswer();
         //console.log("The answer was incorrect");
     }
-    console.log('answerChoice ran')
+    //console.log('answerChoice ran')
 }
 
 //if no answer is selected
@@ -142,14 +135,13 @@ function selectionRequired() {
     $('.close').click(function () {
         $('.overlay').remove();
     })
-
 }
 
 //feedback selected answer is correct
 //increments question index by one
 
 function correctAnswer() {
-    console.log(`The correctAnswer function ran`);
+    //console.log(`The correctAnswer function ran`);
     updateScore();
     $('body').append(`
     <div class="overlay">
@@ -165,14 +157,12 @@ function correctAnswer() {
         $('.overlay').remove();
     })
     questionIndex++;
-    console.log(questionIndex+'from correctAnswer');
 }
 
 //resulting feedback if a selected answer is incorrect
 //increments question index by one
 function wrongAnswer() {
-    
-    console.log(`The wrongAnswer function ran`);
+    //console.log(`The wrongAnswer function ran`);
     $('body').append(`
     <div class="overlay">
       <div class="popup">
@@ -188,7 +178,6 @@ function wrongAnswer() {
         $('.overlay').remove();
     })
     questionIndex++;
-    console.log(questionIndex+'from wrongAnswer');
 }
 
 //increments the number value of the "score" variable by one
@@ -198,7 +187,6 @@ function updateScore() {
     $('.js-score').text(score);
   }
 
-
 //increments the number value of the "question number" variable by one
 //and updates the "question number" text in the quiz view
 function updateQuestionNumber() {
@@ -206,21 +194,9 @@ function updateQuestionNumber() {
     $('.js-question-number').text(questionNumber + 1);
   }
 
-
-//resets the text value of the "question number" and "score" variables
-//and updates their repective text in the quiz view
-function resetProgress(){
-    score = 0; 
-    questionNumber= 0; 
-    questionIndex= 0
-    $('.js-question-number').text(0);
-    $('.js-score').text(0);
-}
-
-
-//determines final score and feedback at the end of the quiz
+//determines final score and will restart the quiz
 function results(){
-    console.log('results ran');
+    //console.log('results ran');
     $('.question-box, .status-bar').hide();
     $('.results').show(); 
     $('.results').html(`    
@@ -234,23 +210,15 @@ function results(){
     $('.results').on('click', '#restart-button', function (event) {
         event.preventDefault();
         window.location.reload(true);
-        //$('.results').hide();
-        //startQuiz();
-        //resetProgress();
-        //$('.start').show();
     });
-    console.log('restartQuiz ran')
+    //console.log('restartQuiz ran')
 }
-
-
 
 function runQuiz(){
     startQuiz();
     createQuestion();
     submitAnswer();
-    //results();
-    //restartQuiz();
-    console.log('runQuiz ran')
+    //console.log('runQuiz ran')
 }
 
 $(runQuiz)

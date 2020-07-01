@@ -2,10 +2,17 @@
     box-sizing: border-box;
 } 
 
-body{
-    background-image:url(images/background.jpg);
+html{
+    background: url(images/background.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
-    background-color: black;
+}
+
+body{
+    height: 100%;
+    margin: 0px;
     text-align: center;
     font-family: 'Poppins', sans-serif;
     display: flex;
@@ -27,7 +34,11 @@ body{
     margin-top: 20px;
     margin-bottom: 20px;
   }
-
+ main{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+ }
   
 h1{
     height: 130px;
@@ -63,6 +74,11 @@ fieldset{
 .button-container{
     margin: 10px;
 }
+
+img {
+    max-width: 90%;
+    height: auto;
+  }
 
 button {
     background-color: #4ec5df;
@@ -107,10 +123,9 @@ button:active {
     width: 90%;
     max-width: 700px;
     position: absolute;
-    top: 50%;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /*border: 12px double #999;*/
   }
   
   .close {
@@ -127,4 +142,31 @@ button:active {
     max-height: 100%;
     max-width: 100%;
   }
-  
+
+@media only screen and (max-width: 550px) {
+    h1{
+        font-size: 25px;
+    }
+
+    h2{
+        font-size: 20px;
+    }
+
+    legend{
+        font-size: 15px;
+    }
+
+    button{
+        font-size: 15px;
+        font-weight: 700;
+    }
+
+    ul{
+        flex-direction: column;
+    }
+
+    label{
+        font-size: 15px;
+    }
+
+  }
