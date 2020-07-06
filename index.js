@@ -5,27 +5,27 @@ const STORE = [
     {
         question:'Which city was first?',
         choices:['Beverly Hills', 'Orange County', 'New York', 'New Jersey'],
-        answer:'Real Hosuewives of Orange County premiered on March 21, 2006 as the first installment of the franchise.',
+        answer:'Orange County',
     },
     {
         question:'What do the Housewives of New Jersey hold at the end of the opening title sequence?',
         choices:['Oranges', 'Flowers', 'Champagne Glasses', 'Nothing'],
-        answer:'The Real Housewives of New Jersey actually hold nothing.',
+        answer:'Nothing',
     },
     {
         question:'According to Sheree, when will her joggers line come out?',
         choices:['Spring/Summer', 'Fall', 'Winter', 'Never'],
-        answer:"She by Sheree was originally planned for a Spring/Summer launch",
+        answer:'Spring/Summer',
     }, 
     {
         question:'Caroline Manzo’s family is “thick as ____ .” (Fill in the Blank)',
         choices:['Bricks', 'Thieves', 'A Bowl of Oatmeal', 'Blood'],
-        answer:'The Manzo family is actually Thick as Thieves',
+        answer:'Thieves',
     },
     {
         question:'Which of the following is NOT a tagline of one of the housewives?',
         choices:['The Queen Of Diamonds Always Has An Ace Up Her Sleeve.','I may not read books, but I will read you.', 'There\'s is Nothing Grey About My Gardens.', 'Don\’t Mess With The Boss, Because You Might Get Fired.'],
-        answer:'No housewife has ever said "I may not read books, but I will read you."',
+        answer:'I may not read books, but I will read you.',
     },
 ]
 
@@ -88,7 +88,7 @@ function createForm(questionIndex) {
   let fieldSelector = $(formMaker).find('fieldset');
 
   STORE[questionIndex].choices.forEach(function (choiceValue, choiceIndex) {
-    $(`<label for="${choiceIndex}">
+    $(`<label class="sizeMe" for="${choiceIndex}">
         <input class="radio" type="radio" id="${choiceIndex}" value="${choiceValue}" name="answer" required>
         <span>${choiceValue}</span>
       </label>
@@ -168,7 +168,7 @@ function wrongAnswer() {
           <img src='images/wrong1.gif' alt="giselle says oooh that's wrong" class="popup-gif">
         </div>
         <div>
-        <span id="correct-answer"></span><span>${STORE[questionNumber].answer} </span>
+        <span id="correct-answer">The correct answer is</span> <span class='emphasize'>${STORE[questionNumber].answer} </span>
         </div>
         <div class='nxt-btn'> <button type="button" class="next-button">Next Question</button></div>
       </div>
@@ -213,7 +213,7 @@ function makeQuiz() {
   startQuiz();
   generateQuestion();
   submitAnswer();
-  nextQuestion();
+  //nextQuestion();
   restartQuiz();
 }
 
