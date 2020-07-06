@@ -58,7 +58,7 @@ function updateQuestionNumber() {
   $('.js-question-number').text(questionNumber + 1);
 }
 
-//DO I REALLY NEED THIS ONE resets the text value of the "question number" and "score" variables
+// resets the text value of the "question number" and "score" variables
 //and updates their repective text in the quiz view
 function resetStats() {
   score = 0;
@@ -211,7 +211,7 @@ function restartQuiz(){
 //runs the functions
 function makeQuiz() {
   startQuiz();
-  generateQuestion();
+  //generateQuestion();
   submitAnswer();
   //nextQuestion();
   restartQuiz();
