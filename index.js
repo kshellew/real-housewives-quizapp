@@ -211,9 +211,7 @@ function restartQuiz(){
 //runs the functions
 function makeQuiz() {
   startQuiz();
-  //generateQuestion();
   submitAnswer();
-  //nextQuestion();
   restartQuiz();
 }
 
