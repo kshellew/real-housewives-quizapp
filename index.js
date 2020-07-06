@@ -5,27 +5,27 @@ const STORE = [
     {
         question:'Which city was first?',
         choices:['Beverly Hills', 'Orange County', 'New York', 'New Jersey'],
-        answer:'Orange County',
+        answer:'Real Hosuewives of Orange County premiered on March 21, 2006 as the first installment of the franchise.',
     },
     {
         question:'What do the Housewives of New Jersey hold at the end of the opening title sequence?',
         choices:['Oranges', 'Flowers', 'Champagne Glasses', 'Nothing'],
-        answer:'Nothing',
+        answer:'The Real Housewives of New Jersey actually hold nothing.',
     },
     {
         question:'According to Sheree, when will her joggers line come out?',
         choices:['Spring/Summer', 'Fall', 'Winter', 'Never'],
-        answer:'Spring/Summer',
+        answer:"She by Sheree was originally planned for a Spring/Summer launch",
     }, 
     {
         question:'Caroline Manzo’s family is “thick as ____ .” (Fill in the Blank)',
         choices:['Bricks', 'Thieves', 'A Bowl of Oatmeal', 'Blood'],
-        answer:'Thieves',
+        answer:'The Manzo family is actually Thick as Thieves',
     },
     {
         question:'Which of the following is NOT a tagline of one of the housewives?',
         choices:['The Queen Of Diamonds Always Has An Ace Up Her Sleeve.','I may not read books, but I will read you.', 'There\'s is Nothing Grey About My Gardens.', 'Don\’t Mess With The Boss, Because You Might Get Fired.'],
-        answer:'I may not read books, but I will read you.',
+        answer:'No housewife has ever said "I may not read books, but I will read you."',
     },
 ]
 
@@ -34,89 +34,90 @@ let questionNumber = 0;
 let score = 0; 
 let questionIndex = 0;
 
-//begins the quiz
-//hides the start box
-//on click, shows the status bar
-
-function startQuiz(){
-    $('.start').on('click', '.start-btn', function () {
-        //console.log('startQuiz ran');
-        $('.start').hide();
-        $('.quiz-form, .status-bar').show();
-        createQuestion();
-    })   
+//template to generate each question
+function generateQuestion() {
+  if (questionNumber < STORE.length) {
+    return createForm(questionNumber);
+  } else {
+    $('.question-box').hide();
+    results();
+  }
 }
 
-//renders each question
-function createQuestion(){
-    if (questionIndex===5){
-        //console.log('end of questions')
-        results()
-    } else {
-        $('.question-box').html(`
-    <form class="js-quiz-form">
-        <fieldset name="possible-answers" class="quiz-text">
-        <legend class='emphasize'> ${STORE[questionIndex].question}</legend>
-          <input type="radio" name="answer" id="answer1" required value ="${STORE[questionIndex].choices[0]}">
-          <label for="answer1">${STORE[questionIndex].choices[0]}</label>
-          <br>
-          <input type="radio" name="answer" id="answer2" required value="${STORE[questionIndex].choices[1]}">
-          <label for="answer2">${STORE[questionIndex].choices[1]}</label>
-          <br>
-          <input type="radio" name="answer" id="answer3" required value="${STORE[questionIndex].choices[2]}">
-          <label for="answer3">${STORE[questionIndex].choices[2]}</label>
-          <br>
-          <input type="radio" name="answer" id="answer4" required value="${STORE[questionIndex].choices[3]}">
-          <label for="answer4">${STORE[questionIndex].choices[3]}</label>
-          <br>
-        </fieldset>
-        <div class='button-container'>
-            <button type="submit" id="submit-button">Submit</button>
-        </div>
-    </form>`);
+//increments the number value of the "score" variable by one
+//and updates the "score" number text in the quiz view
+function updateScore() {
+  score++;
+  $('.js-score').text(score);
+}
 
-    }
-    //console.log(questionIndex +'from createQuestion')
-    //console.log('createQuestion ran')
+//increments the number value of the "question number" variable by one
+//and updates the "question number" text in the quiz view
+function updateQuestionNumber() {
+  questionNumber++;
+  $('.js-question-number').text(questionNumber + 1);
+}
 
+//DO I REALLY NEED THIS ONE resets the text value of the "question number" and "score" variables
+//and updates their repective text in the quiz view
+function resetStats() {
+  score = 0;
+  questionNumber = 0;
+  $('.js-score').text(0);
+  $('.questionNumber').text(0);
+}
+
+//begins the quiz
+function startQuiz() {
+  $('.start').on('click', '.start-btn', function (event) {
+    $('.start').hide();
+    $('.questionNumber').text(1);
+    $('.question-box, .status-bar').show();
+    $('.question-box').prepend(generateQuestion());
+  });
+}
+
+//creates the html for quiz form
+function createForm(questionIndex) {
+  let formMaker = $(`<form>
+    <fieldset>
+      <legend class="emphasize">${STORE[questionIndex].question}</legend>
+    </fieldset>
+  </form>`)
+
+  let fieldSelector = $(formMaker).find('fieldset');
+
+  STORE[questionIndex].choices.forEach(function (choiceValue, choiceIndex) {
+    $(`<label for="${choiceIndex}">
+        <input class="radio" type="radio" id="${choiceIndex}" value="${choiceValue}" name="answer" required>
+        <span>${choiceValue}</span>
+      </label>
+      `).appendTo(fieldSelector);
+  });
+  $(`<div class='button-container'> <button type="submit" id="submit-button">Submit</button></div>`).appendTo(fieldSelector);
+  return formMaker;
 }
 
 //submits a selected answer and checks it against the correct answer
 //runs answer functions accordingly
-function submitAnswer(){
-    $('body').on('click', '#submit-button', function (event) {
-        event.preventDefault();
-        let selectAns = $('input[name=answer]:checked', '.js-quiz-form').val();
-
-        //If no answer is selected, prompt User
-        if (!selectAns) {
-            // console.log('selection is required');
-            selectionRequired(selectAns);
-        } else if (questionIndex < 5) {
-            answerChoice(selectAns);     
-            createQuestion();
-            updateQuestionNumber();
-            }
-        //After all questions have been asked, Final Score Page is loaded
-        else {
-            answerChoice(selectAns);
-            results();
-        }
-    })
-        let selectAns = ``;
-    
-    //console.log('submitAnswer ran')
-}
-
-function answerChoice(sel) {
-    if (sel === STORE[questionIndex].answer) {
-        //console.log("The answer was correct");
-        correctAnswer();      
-    } else {
-        wrongAnswer();
-        //console.log("The answer was incorrect");
+function submitAnswer() {
+  $('.question-box').on('click', '#submit-button', function (event) {
+    event.preventDefault();
+    //$('.altBox').hide();
+    //$('.response').show();
+    let selectAns = $('input:checked').val();
+    //let answer = selected.val();
+    let correct = STORE[questionNumber].answer;
+    if (!selectAns) {
+      selectionRequired();
+    } else if (selectAns === correct) {
+      correctAnswer();
+      nextQuestion();
+    } else{
+      wrongAnswer();
+      nextQuestion();
     }
-    //console.log('answerChoice ran')
+  });
 }
 
 //if no answer is selected
@@ -125,74 +126,66 @@ function selectionRequired() {
     $('.question-box').append(`
     <div class="overlay">
       <div class="popup">
-        <a class="close" href="#">&times;</a>
         <h2>Uh un honey, pick an answer.</h2>
         <div class="gif-container">
           <img src="images/pickananswer.gif" alt="Kyle says pick a lane" class="popup-gif">
         </div>
+        <div class='button-container'> <button type="button" class="back-button">Back to Question</button></div>
       </div>
     </div>`);
-    $('.close').click(function () {
+    $('.back-button').click(function () {
         $('.overlay').remove();
     })
-}
+} 
 
-//feedback selected answer is correct
-//increments question index by one
-
+//resulting feedback if a selected answer is correct
+//increments user score by one
 function correctAnswer() {
-    //console.log(`The correctAnswer function ran`);
-    updateScore();
-    $('body').append(`
+  $('body').append(`
     <div class="overlay">
       <div class="popup">
-        <a class="close" href="#">&times;</a>
         <h2>You got it!</h2>
         <div class="gif-container">
           <img src="images/correct.gif" alt="porsha snaps in approval'" class="popup-gif">
         </div>
+        <div class='nxt-btn'> <button type="button" class="next-button">Next Question</button></div>
       </div>
+    </div>
     </div>`);
-    $('.close').click(function () {
-        $('.overlay').remove();
+    $('.nxt-btn').click(function () {
+      $('.overlay').remove();
     })
-    questionIndex++;
-}
+    updateScore();
+} 
 
 //resulting feedback if a selected answer is incorrect
-//increments question index by one
 function wrongAnswer() {
-    //console.log(`The wrongAnswer function ran`);
-    $('body').append(`
+  $('body').append(`
     <div class="overlay">
       <div class="popup">
-        <a class="close" href="#">&times;</a>
         <h2>So wrong, so wrong.</h2>
         <div class="gif-container">
           <img src='images/wrong1.gif' alt="giselle says oooh that's wrong" class="popup-gif">
         </div>
-        <span id="correct-answer">The correct answer is</span> <span class='emphasize'>${STORE[questionIndex].answer} </span>
+        <div>
+        <span id="correct-answer"></span><span>${STORE[questionNumber].answer} </span>
+        </div>
+        <div class='nxt-btn'> <button type="button" class="next-button">Next Question</button></div>
+      </div>
       </div>
     </div>`);
-    $('.close').click(function () {
+    $('.nxt-btn').click(function () {
         $('.overlay').remove();
     })
-    questionIndex++;
-}
+  };
 
-//increments the number value of the "score" variable by one
-//and updates the "score" number text in the quiz view
-function updateScore() {
-    score++;
-    $('.js-score').text(score);
-  }
+//generates the next question
+function nextQuestion() {
+    //console.log('next question working')
+    updateQuestionNumber();
+    $('.question-box form').replaceWith(generateQuestion());
+  };
 
-//increments the number value of the "question number" variable by one
-//and updates the "question number" text in the quiz view
-function updateQuestionNumber() {
-    questionNumber++;
-    $('.js-question-number').text(questionNumber + 1);
-  }
 
 //determines final score and will restart the quiz
 function results(){
@@ -206,19 +199,22 @@ function results(){
         <div class='button-container'>
             <button type="submit" id="restart-button">Restart</button>
         </div>`);
-    //restarts the quiz
-    $('.results').on('click', '#restart-button', function (event) {
-        event.preventDefault();
-        window.location.reload(true);
-    });
-    //console.log('restartQuiz ran')
+}
+function restartQuiz(){
+  $('.results').on('click', '#restart-button', function (event) {
+          event.preventDefault();
+          window.location.reload(true);
+      });
+}
+   
+
+//runs the functions
+function makeQuiz() {
+  startQuiz();
+  generateQuestion();
+  submitAnswer();
+  nextQuestion();
+  restartQuiz();
 }
 
-function runQuiz(){
-    startQuiz();
-    createQuestion();
-    submitAnswer();
-    //console.log('runQuiz ran')
-}
-
-$(runQuiz)
+$(makeQuiz)

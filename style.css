@@ -21,9 +21,9 @@ body{
   } 
 
 .box {
-    max-width: 700px;
+    max-width: 650px;
     background-color: #FFFFFF;
-    border: 10px solid #4ec5df;
+    border: 10px solid #1B7D93;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -69,6 +69,9 @@ ul{
 
 fieldset{
     border: none;
+    display: flex;
+    flex-direction: column;
+
 }
 
 .button-container{
@@ -81,7 +84,7 @@ img {
   }
 
 button {
-    background-color: #4ec5df;
+    background-color: #1B7D93;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -94,7 +97,7 @@ button {
   
 button:hover,
 button:active {
-    background-color: #4ec5dfc2;
+    background-color: #0f4b58;
     -webkit-transition: background 0.1s;
     -moz-transition: background 0.1s;
     -o-transition: background 0.1s;
@@ -127,16 +130,7 @@ button:active {
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  
-  .close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 50px;
-    color: #4ec5dfc2;
-    text-decoration: none;
-  }
-  
+    
   .popup-gif {
     margin: 0 auto;
     max-height: 100%;

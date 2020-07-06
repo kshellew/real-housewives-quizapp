@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 	<meta charset="utf-8">
@@ -13,38 +13,36 @@
 <body>
     <header>
         <!-- Quiz Title, Always Displayed-->
-        <h1 class='box title'>How Well Do You Know Bravo's Real Housewives?</h1>
+        <h1 class='box'>How Well Do You Know Bravo's Real Housewives?</h1>
     </header>
-        <main>
-            <!-- Status Bar-->
-            <section class='status-bar box hidden'>
-                <ul>
-                    <li> <span class='emphasize'> Question: </span> <span class='js-question-number'> 1 </span> of 5</li>
-                    <li> <span class='emphasize'> Score: </span> <span class='js-score'> 0 </span> pts</li>
-                </ul>
-            </section>
-            
-            <!-- Start Box -->
-            <section>
-                <div class='start box'>
-                    <h2>Ready To Get Started?</h2>
-                    <img src="images/intro.gif" alt="gif giselle saying this is going to be good" class="gifs">
-                    <div class='button-container'>
-                        <button class='start-btn'>Let's Go!</button>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Question Box -->
-            <section class='quiz-form hidden'>
-                <div class='box question-box'>
-               </div>
-            </section>
+    <main>
+        <!-- Status Bar-->
+        <section class='status-bar box hidden'>
+            <ul>
+                <li> <span class='emphasize'> Question: </span> <span class='js-question-number'> 1 </span> of 5</li>
+                <li> <span class='emphasize'> Score: </span> <span class='js-score'> 0 </span> pts</li>
+            </ul>
+        </section>
         
-            <!-- Final Results Box -->
-            <section class='results box hidden'>
-            </section>      
-        </main>
+        <!-- Start Box -->
+        <section>
+            <div class='box start'>
+                <h2>Ready To Get Started?</h2>
+                <img src="images/intro.gif" alt="gif giselle saying this is going to be good" class="gifs">
+                <div class='button-container'>
+                    <button class='start-btn'>Let's Go!</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Question Box -->
+        <section class='box question-box hidden'>
+        </section>
+    
+        <!-- Final Results Box -->
+        <section class='box results hidden'>
+        </section>      
+    </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="index.js"></script>  
 </body>
